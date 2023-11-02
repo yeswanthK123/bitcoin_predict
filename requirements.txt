@@ -1,0 +1,11 @@
+flask 
+numpy 
+pandas 
+scikit-learn 
+tensorflow 
+yfinance
+flask-cors
+flask_socketio
+requests
+streamlit
+

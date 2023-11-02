@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bitcoin Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5; /* Light gray background */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Dark gray text color */
+        }
+
+        .price-box {
+            background-color: #ff9900; /* Bitcoin orange */
+            color: #fff; /* White text color */
+            padding: 10px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #333; /* Dark gray text color */
+        }
+
+        p {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        #predictions {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bitcoin Price Prediction</h1>
+    <div class="price-box">
+        <h2>Real Bitcoin Price</h2>
+        <p id="real-price">Loading...</p>
+    </div>
+    <div class="price-box">
+        <h2>Predicted Bitcoin Price</h2>
+        <p id="predicted-price">Loading...</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+    
+        socket.on('connect', function() {
+            console.log('Connected to the server');
+        });
+    
+        socket.on('update_data', function(data) {
+            console.log(data);
+            document.getElementById('real-price').textContent = data.last_price.toFixed(2);
+            document.getElementById('predicted-price').textContent = data.predicted_price.toFixed(2);
+        });
+    </script>
+    
+</body>
+</html>
